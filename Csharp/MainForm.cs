@@ -61,6 +61,7 @@ namespace MoveToSubFolders
 			//출처 : https://zzangwoo.tistory.com/entry/CWinform-%ED%8F%B4%EB%8D%94-%EB%B0%8F-%ED%8C%8C%EC%9D%BC-%EC%84%A0%ED%83%9D-CommonOpenFileDialog-OpenFileDialog-FolderBrowserDialog
 			//경로 찾기
 			FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+			folderBrowserDialog.SelectedPath = txt202FolderPath.Text; // 기존경로 세팅
 			if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
 			{
 				//MessageBox.Show(folderBrowserDialog.SelectedPath);
