@@ -19,6 +19,7 @@ namespace MoveToSubFolders
 		private System.Windows.Forms.TabPage tabPage2;
 		private System.Windows.Forms.TabPage tabPage3;
 		private System.Windows.Forms.TabPage tabPage4;
+		private System.Windows.Forms.TextBox txt101;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -43,10 +44,12 @@ namespace MoveToSubFolders
 		{
 			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.tabPage1 = new System.Windows.Forms.TabPage();
+			this.txt101 = new System.Windows.Forms.TextBox();
 			this.tabPage2 = new System.Windows.Forms.TabPage();
 			this.tabPage3 = new System.Windows.Forms.TabPage();
 			this.tabPage4 = new System.Windows.Forms.TabPage();
 			this.tabControl1.SuspendLayout();
+			this.tabPage1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tabControl1
@@ -64,6 +67,7 @@ namespace MoveToSubFolders
 			// 
 			// tabPage1
 			// 
+			this.tabPage1.Controls.Add(this.txt101);
 			this.tabPage1.Location = new System.Drawing.Point(4, 28);
 			this.tabPage1.Name = "tabPage1";
 			this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -71,6 +75,15 @@ namespace MoveToSubFolders
 			this.tabPage1.TabIndex = 0;
 			this.tabPage1.Text = "01설명";
 			this.tabPage1.UseVisualStyleBackColor = true;
+			// 
+			// txt101
+			// 
+			this.txt101.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.txt101.Location = new System.Drawing.Point(3, 3);
+			this.txt101.Multiline = true;
+			this.txt101.Name = "txt101";
+			this.txt101.Size = new System.Drawing.Size(884, 406);
+			this.txt101.TabIndex = 0;
 			// 
 			// tabPage2
 			// 
@@ -110,7 +123,10 @@ namespace MoveToSubFolders
 			this.Controls.Add(this.tabControl1);
 			this.Name = "MainForm";
 			this.Text = "MoveToSubFolders";
+			this.Load += new System.EventHandler(this.MainFormLoad);
 			this.tabControl1.ResumeLayout(false);
+			this.tabPage1.ResumeLayout(false);
+			this.tabPage1.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
