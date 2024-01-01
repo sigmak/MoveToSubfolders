@@ -50,6 +50,9 @@ namespace MoveToSubFolders
 	
 			txt201Ext.Text ="vbp";  //vb6 프로젝트 파일 확장자
 			
+			//출처 : https://w9526819.tistory.com/20
+			txt202FolderPath.Text = System.IO.Directory.GetCurrentDirectory(); // 현재 실행파일 경로 가져오기
+			
 		}
 		
 		//2-1. 폴더 경로 찾기
