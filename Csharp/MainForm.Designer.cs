@@ -20,6 +20,11 @@ namespace MoveToSubFolders
 		private System.Windows.Forms.TabPage tabPage3;
 		private System.Windows.Forms.TabPage tabPage4;
 		private System.Windows.Forms.TextBox txt101;
+		private System.Windows.Forms.TextBox txt201Ext;
+		private System.Windows.Forms.Label lbl201;
+		private System.Windows.Forms.Button btn202Path;
+		private System.Windows.Forms.TextBox txt202FolderPath;
+		private System.Windows.Forms.Label lbl202;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -46,10 +51,16 @@ namespace MoveToSubFolders
 			this.tabPage1 = new System.Windows.Forms.TabPage();
 			this.txt101 = new System.Windows.Forms.TextBox();
 			this.tabPage2 = new System.Windows.Forms.TabPage();
+			this.txt201Ext = new System.Windows.Forms.TextBox();
+			this.lbl201 = new System.Windows.Forms.Label();
+			this.btn202Path = new System.Windows.Forms.Button();
+			this.txt202FolderPath = new System.Windows.Forms.TextBox();
+			this.lbl202 = new System.Windows.Forms.Label();
 			this.tabPage3 = new System.Windows.Forms.TabPage();
 			this.tabPage4 = new System.Windows.Forms.TabPage();
 			this.tabControl1.SuspendLayout();
 			this.tabPage1.SuspendLayout();
+			this.tabPage2.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tabControl1
@@ -87,6 +98,11 @@ namespace MoveToSubFolders
 			// 
 			// tabPage2
 			// 
+			this.tabPage2.Controls.Add(this.txt201Ext);
+			this.tabPage2.Controls.Add(this.lbl201);
+			this.tabPage2.Controls.Add(this.btn202Path);
+			this.tabPage2.Controls.Add(this.txt202FolderPath);
+			this.tabPage2.Controls.Add(this.lbl202);
 			this.tabPage2.Location = new System.Drawing.Point(4, 28);
 			this.tabPage2.Name = "tabPage2";
 			this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -94,6 +110,46 @@ namespace MoveToSubFolders
 			this.tabPage2.TabIndex = 1;
 			this.tabPage2.Text = "02설정";
 			this.tabPage2.UseVisualStyleBackColor = true;
+			// 
+			// txt201Ext
+			// 
+			this.txt201Ext.Location = new System.Drawing.Point(165, 10);
+			this.txt201Ext.Name = "txt201Ext";
+			this.txt201Ext.Size = new System.Drawing.Size(100, 28);
+			this.txt201Ext.TabIndex = 21;
+			// 
+			// lbl201
+			// 
+			this.lbl201.Location = new System.Drawing.Point(16, 16);
+			this.lbl201.Name = "lbl201";
+			this.lbl201.Size = new System.Drawing.Size(153, 22);
+			this.lbl201.TabIndex = 20;
+			this.lbl201.Text = "프로젝트 확장자 :";
+			// 
+			// btn202Path
+			// 
+			this.btn202Path.Location = new System.Drawing.Point(531, 63);
+			this.btn202Path.Name = "btn202Path";
+			this.btn202Path.Size = new System.Drawing.Size(70, 29);
+			this.btn202Path.TabIndex = 19;
+			this.btn202Path.Text = "...";
+			this.btn202Path.UseVisualStyleBackColor = true;
+			this.btn202Path.Click += new System.EventHandler(this.Btn202PathClick);
+			// 
+			// txt202FolderPath
+			// 
+			this.txt202FolderPath.Location = new System.Drawing.Point(76, 63);
+			this.txt202FolderPath.Name = "txt202FolderPath";
+			this.txt202FolderPath.Size = new System.Drawing.Size(449, 28);
+			this.txt202FolderPath.TabIndex = 18;
+			// 
+			// lbl202
+			// 
+			this.lbl202.Location = new System.Drawing.Point(16, 68);
+			this.lbl202.Name = "lbl202";
+			this.lbl202.Size = new System.Drawing.Size(58, 22);
+			this.lbl202.TabIndex = 17;
+			this.lbl202.Text = "경로 :";
 			// 
 			// tabPage3
 			// 
@@ -127,6 +183,8 @@ namespace MoveToSubFolders
 			this.tabControl1.ResumeLayout(false);
 			this.tabPage1.ResumeLayout(false);
 			this.tabPage1.PerformLayout();
+			this.tabPage2.ResumeLayout(false);
+			this.tabPage2.PerformLayout();
 			this.ResumeLayout(false);
 
 		}

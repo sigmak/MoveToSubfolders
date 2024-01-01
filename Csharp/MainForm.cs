@@ -41,6 +41,22 @@ namespace MoveToSubFolders
 			txt101.Text += "_XXX로 분기되는 패턴이 먼저 분류가 되기 때문에 "  + "\r\n" + "\r\n";
 			txt101.Text += "_XXX로 분기 안된 프로젝트와 섞이지 않게 됨.  " + "\r\n" + "\r\n";
 	
+			txt201Ext.Text ="vbp";  //vb6 프로젝트 파일 확장자
+			
+		}
+		
+		//2-1. 폴더 경로 찾기
+		void Btn202PathClick(object sender, EventArgs e)
+		{
+			//출처 : https://zzangwoo.tistory.com/entry/CWinform-%ED%8F%B4%EB%8D%94-%EB%B0%8F-%ED%8C%8C%EC%9D%BC-%EC%84%A0%ED%83%9D-CommonOpenFileDialog-OpenFileDialog-FolderBrowserDialog
+			//경로 찾기
+			FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+			if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+			{
+				//MessageBox.Show(folderBrowserDialog.SelectedPath);
+				txt202FolderPath.Text = folderBrowserDialog.SelectedPath;
+			}			
+	
 		}
 	}
 }
