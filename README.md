@@ -1,6 +1,10 @@
 # MoveToSubfolders
 한폴더안에 여러 프로젝트 소스코드들이 섞여있을때 프로젝트명 으로 하위폴더생성해서 자동분류
 
+
+<img src='https://github.com/sigmak/MoveToSubfolders/blob/main/Csharp/moveToSubFolders_sc.gif' />
+
+
 참고 - github 웹브라우저에서 폴더 분기하는 방법
 
 출처: https://mac-user-guide.tistory.com/57
