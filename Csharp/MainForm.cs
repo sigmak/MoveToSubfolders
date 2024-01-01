@@ -10,6 +10,13 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using System.IO;
+using System.Linq; // OrderByDescending 사용을 위해
+
+//using System.Collections;
+//using System.Windows.Forms;
+
+
 
 namespace MoveToSubFolders
 {
@@ -58,5 +65,91 @@ namespace MoveToSubFolders
 			}			
 	
 		}
+		
+		//3-1 분류 run
+		void Btn301RunClick(object sender, EventArgs e)
+		{
+			// 파일명
+			
+			DirectoryInfo myDirectory = new DirectoryInfo(txt202FolderPath.Text);
+			FileInfo[] files = myDirectory.GetFiles("*." + txt201Ext.Text).OrderByDescending(file => System.Text.Encoding.Default.GetByteCount(file.Name)).ToArray();
+			
+			//출처 : https://www.csharpstudy.com/WinForms/WinForms-listview.aspx
+			// 리스트뷰 아이템을 업데이트 하기 시작.
+			// 업데이트가 끝날 때까지 UI 갱신 중지.
+			listView301.BeginUpdate();		
+			
+			// 뷰모드 지정
+			listView301.View = View.Details;
+			
+			// 아이콘을 위해 이미지 지정
+			//listView301.LargeImageList = imageList1;
+			//listView301.SmallImageList = imageList2;
+			
+			foreach (var fi in files)
+			{
+				// 각 파일별로 ListViewItem객체를 하나씩 만듦
+				// 파일명, 사이즈, 날짜 정보를 추가
+				string fileNameOnly = Path.GetFileNameWithoutExtension(fi.Name);
+				ListViewItem lvi = new ListViewItem(fileNameOnly); //파일명만
+				lvi.SubItems.Add(Path.GetExtension(fi.Name)); // 확장자만 ex) .vbp
+				lvi.SubItems.Add(FormatFileSize(System.Text.Encoding.Default.GetByteCount(fileNameOnly))); // 파일명길이
+				
+ 				//lvi.SubItems.Add(fi.Length.ToString());
+				lvi.SubItems.Add(FormatFileSize(fi.Length)); // 천단위마다 콤마 표시
+				lvi.SubItems.Add(fi.LastWriteTime.ToString());
+				lvi.ImageIndex = 0;
+				
+				// ListViewItem객체를 Items 속성에 추가
+				listView301.Items.Add(lvi);
+			}
+			
+			// 컬럼명과 컬럼사이즈 지정
+			listView301.Columns.Add("파일명", 160, HorizontalAlignment.Left);
+			listView301.Columns.Add("확장자", 60, HorizontalAlignment.Left);
+			listView301.Columns.Add("파일명 길이", 50, HorizontalAlignment.Right);
+			listView301.Columns.Add("사이즈", 70, HorizontalAlignment.Right);
+			listView301.Columns.Add("날짜", 150, HorizontalAlignment.Left);
+
+			// 리스뷰를 Refresh하여 보여줌
+			listView301.EndUpdate();			
+			
+	    	foreach (ListViewItem lvi in listView301.Items)
+	    	{
+	    		
+	    		// 프로젝트파일명 (확장자없이) 으로
+	    		//1. 디렉토리가 없으면 생성
+	    		//2. 디렉토리가 있으면 생성하지 않음
+	    		//3. "*" + "프로젝트파일명" + "*.*" 패턴으로 프로젝트파일명 폴더에 복사
+	    		FileInfo[] subfiles = myDirectory.GetFiles("*" + lvi.SubItems[0].Text + ".*").OrderByDescending(file => System.Text.Encoding.Default.GetByteCount(file.Name)).ToArray();
+	    		string source_path = txt202FolderPath.Text;
+	    		string target_path = txt202FolderPath.Text +"\\" + lvi.SubItems[0].Text;
+	    		
+	    		bool exists = System.IO.Directory.Exists(target_path); // sub 폴더 존재하는지 체크
+	    		if(!exists)
+	    		{
+	    			System.IO.Directory.CreateDirectory(target_path); // 없으면 폴더 생성
+	    		} else {
+	    		}
+	    			
+	    			
+	    		foreach (var sfi in subfiles)
+	    		{
+	    			//출처 : https://jinuk97-dev.tistory.com/8
+	    			string source_file = System.IO.Path.Combine(source_path, sfi.Name);
+	    			string dest_file = System.IO.Path.Combine(target_path, sfi.Name);
+	    			System.IO.File.Move(source_file, dest_file); //이동
+	    		}
+	    	}
+	    	MessageBox.Show("파일분류완료!!!");
+	
+		}
+
+		static string FormatFileSize(long fileSize)
+		{
+			// 파일 크기를 천 단위로 쉼표로 구분하여 형식 지정
+			return string.Format("{0:#,0}", fileSize);
+		}		
+		
 	}
 }
