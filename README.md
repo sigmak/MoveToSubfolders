@@ -6,8 +6,12 @@
 출처: https://mac-user-guide.tistory.com/57
 
 1. 우측 상단에 Add file 클릭 -> Create new File 클릭
+
 2.  '/' 구분자를 이용해 폴더이름, 파일이름 type
+
 주의사항
+
 github에서는 빈 폴더를 생성할수 없으니 
+
 생성할 파일이 없으면 그냥 readme.md 를 입력
 
