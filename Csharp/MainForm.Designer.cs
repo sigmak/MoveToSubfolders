@@ -27,6 +27,7 @@ namespace MoveToSubFolders
 		private System.Windows.Forms.Label lbl202;
 		private System.Windows.Forms.ListView listView301;
 		private System.Windows.Forms.Button btn301Run;
+		private System.Windows.Forms.TextBox txt401;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -59,13 +60,15 @@ namespace MoveToSubFolders
 			this.txt202FolderPath = new System.Windows.Forms.TextBox();
 			this.lbl202 = new System.Windows.Forms.Label();
 			this.tabPage3 = new System.Windows.Forms.TabPage();
-			this.tabPage4 = new System.Windows.Forms.TabPage();
 			this.listView301 = new System.Windows.Forms.ListView();
 			this.btn301Run = new System.Windows.Forms.Button();
+			this.tabPage4 = new System.Windows.Forms.TabPage();
+			this.txt401 = new System.Windows.Forms.TextBox();
 			this.tabControl1.SuspendLayout();
 			this.tabPage1.SuspendLayout();
 			this.tabPage2.SuspendLayout();
 			this.tabPage3.SuspendLayout();
+			this.tabPage4.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tabControl1
@@ -168,16 +171,6 @@ namespace MoveToSubFolders
 			this.tabPage3.Text = "03분류";
 			this.tabPage3.UseVisualStyleBackColor = true;
 			// 
-			// tabPage4
-			// 
-			this.tabPage4.Location = new System.Drawing.Point(4, 28);
-			this.tabPage4.Name = "tabPage4";
-			this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage4.Size = new System.Drawing.Size(890, 412);
-			this.tabPage4.TabIndex = 3;
-			this.tabPage4.Text = "04결과표시";
-			this.tabPage4.UseVisualStyleBackColor = true;
-			// 
 			// listView301
 			// 
 			this.listView301.Location = new System.Drawing.Point(18, 59);
@@ -196,6 +189,27 @@ namespace MoveToSubFolders
 			this.btn301Run.UseVisualStyleBackColor = true;
 			this.btn301Run.Click += new System.EventHandler(this.Btn301RunClick);
 			// 
+			// tabPage4
+			// 
+			this.tabPage4.Controls.Add(this.txt401);
+			this.tabPage4.Location = new System.Drawing.Point(4, 28);
+			this.tabPage4.Name = "tabPage4";
+			this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPage4.Size = new System.Drawing.Size(890, 412);
+			this.tabPage4.TabIndex = 3;
+			this.tabPage4.Text = "04결과표시";
+			this.tabPage4.UseVisualStyleBackColor = true;
+			// 
+			// txt401
+			// 
+			this.txt401.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.txt401.Location = new System.Drawing.Point(3, 3);
+			this.txt401.Multiline = true;
+			this.txt401.Name = "txt401";
+			this.txt401.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+			this.txt401.Size = new System.Drawing.Size(884, 406);
+			this.txt401.TabIndex = 1;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
@@ -211,6 +225,8 @@ namespace MoveToSubFolders
 			this.tabPage2.ResumeLayout(false);
 			this.tabPage2.PerformLayout();
 			this.tabPage3.ResumeLayout(false);
+			this.tabPage4.ResumeLayout(false);
+			this.tabPage4.PerformLayout();
 			this.ResumeLayout(false);
 
 		}

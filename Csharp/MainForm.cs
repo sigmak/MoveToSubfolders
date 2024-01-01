@@ -114,8 +114,10 @@ namespace MoveToSubFolders
 			// 리스뷰를 Refresh하여 보여줌
 			listView301.EndUpdate();			
 			
+			txt401.Text ="";
 	    	foreach (ListViewItem lvi in listView301.Items)
 	    	{
+	    		txt401.Text += lvi.SubItems[0].Text + "\r\n";
 	    		
 	    		// 프로젝트파일명 (확장자없이) 으로
 	    		//1. 디렉토리가 없으면 생성
@@ -129,7 +131,9 @@ namespace MoveToSubFolders
 	    		if(!exists)
 	    		{
 	    			System.IO.Directory.CreateDirectory(target_path); // 없으면 폴더 생성
+	    			txt401.Text += target_path + " 폴더 새로 생성"+ "\r\n";
 	    		} else {
+	    			txt401.Text += target_path + " 폴더 이미 존재"+ "\r\n";
 	    		}
 	    			
 	    			
@@ -138,9 +142,11 @@ namespace MoveToSubFolders
 	    			//출처 : https://jinuk97-dev.tistory.com/8
 	    			string source_file = System.IO.Path.Combine(source_path, sfi.Name);
 	    			string dest_file = System.IO.Path.Combine(target_path, sfi.Name);
+	    			txt401.Text += source_file + " --> " + dest_file + "\r\n";
 	    			System.IO.File.Move(source_file, dest_file); //이동
 	    		}
 	    	}
+	    	txt401.Text += "파일분류완료!!!" + "\r\n";
 	    	MessageBox.Show("파일분류완료!!!");
 	
 		}
