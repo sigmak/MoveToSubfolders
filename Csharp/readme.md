@@ -1,5 +1,4 @@
 1. 개발관련 정보
-
 툴 : SharpDevelopment 5.1  
 
 언어 : c# 언어
@@ -8,7 +7,8 @@ https://sourceforge.net/projects/sharpdevelop/files/SharpDevelop%205.x/5.1/
 
 개발 기간 : 2023.12.30 ~ 2023.12.31 
 
-​메인 알고리즘 :
+
+2. ​메인 알고리즘 
 
 한 폴더에 여러가지 프로젝트 소스코드들이 섞여 있어서
 
@@ -22,5 +22,6 @@ _XXX로 분기되는 패턴이 먼저 분류가 되기 때문에
 
 _XXX로 분기 안된 프로젝트와 섞이지 않게 됨.  
 
+3. 사용예제 캡쳐
 <img src='https://github.com/sigmak/MoveToSubfolders/blob/main/Csharp/moveToSubFolders_sc.gif' />
 
