@@ -32,6 +32,8 @@ namespace MoveToSubFolders
 		private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
 		private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
 		private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+		private System.Windows.Forms.Button btn302Stop;
+		private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -64,6 +66,7 @@ namespace MoveToSubFolders
 			this.txt202FolderPath = new System.Windows.Forms.TextBox();
 			this.lbl202 = new System.Windows.Forms.Label();
 			this.tabPage3 = new System.Windows.Forms.TabPage();
+			this.btn302Stop = new System.Windows.Forms.Button();
 			this.listView301 = new System.Windows.Forms.ListView();
 			this.btn301Run = new System.Windows.Forms.Button();
 			this.tabPage4 = new System.Windows.Forms.TabPage();
@@ -72,6 +75,7 @@ namespace MoveToSubFolders
 			this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
 			this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
 			this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+			this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
 			this.tabControl1.SuspendLayout();
 			this.tabPage1.SuspendLayout();
 			this.tabPage2.SuspendLayout();
@@ -179,6 +183,7 @@ namespace MoveToSubFolders
 			// 
 			// tabPage3
 			// 
+			this.tabPage3.Controls.Add(this.btn302Stop);
 			this.tabPage3.Controls.Add(this.listView301);
 			this.tabPage3.Controls.Add(this.btn301Run);
 			this.tabPage3.Location = new System.Drawing.Point(4, 22);
@@ -189,6 +194,17 @@ namespace MoveToSubFolders
 			this.tabPage3.TabIndex = 2;
 			this.tabPage3.Text = "03분류";
 			this.tabPage3.UseVisualStyleBackColor = true;
+			// 
+			// btn302Stop
+			// 
+			this.btn302Stop.Location = new System.Drawing.Point(95, 7);
+			this.btn302Stop.Margin = new System.Windows.Forms.Padding(2);
+			this.btn302Stop.Name = "btn302Stop";
+			this.btn302Stop.Size = new System.Drawing.Size(80, 19);
+			this.btn302Stop.TabIndex = 5;
+			this.btn302Stop.Text = "Stop";
+			this.btn302Stop.UseVisualStyleBackColor = true;
+			this.btn302Stop.Click += new System.EventHandler(this.Btn302StopClick);
 			// 
 			// listView301
 			// 
@@ -238,7 +254,8 @@ namespace MoveToSubFolders
 			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
 			this.toolStripStatusLabel1,
 			this.toolStripProgressBar1,
-			this.toolStripStatusLabel2});
+			this.toolStripStatusLabel2,
+			this.toolStripStatusLabel3});
 			this.statusStrip1.Location = new System.Drawing.Point(0, 274);
 			this.statusStrip1.Name = "statusStrip1";
 			this.statusStrip1.Size = new System.Drawing.Size(629, 22);
@@ -261,6 +278,12 @@ namespace MoveToSubFolders
 			this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
 			this.toolStripStatusLabel2.Size = new System.Drawing.Size(121, 17);
 			this.toolStripStatusLabel2.Text = "toolStripStatusLabel2";
+			// 
+			// toolStripStatusLabel3
+			// 
+			this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+			this.toolStripStatusLabel3.Size = new System.Drawing.Size(121, 17);
+			this.toolStripStatusLabel3.Text = "toolStripStatusLabel3";
 			// 
 			// MainForm
 			// 

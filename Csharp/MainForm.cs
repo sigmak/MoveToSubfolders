@@ -12,7 +12,9 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
 using System.Linq; // OrderByDescending 사용을 위해
-
+using System.Threading.Tasks;
+using System.ComponentModel;
+using System.Threading;
 
 // CS 201 : Properites\AssemblyInfo.cs 파일이 없다는 오류메세지 나오면
 // Properites 폴더 만들고 그 폴더 안에 AssemblyInfo.cs 파일 생성(내용 없어도 됨) 후
@@ -61,6 +63,11 @@ namespace MoveToSubFolders
 			
 			toolStripStatusLabel2.Text ="";
 			
+			toolStripStatusLabel3.Text ="";	
+			
+			btn301Run.Enabled = true;
+			btn302Stop.Enabled = false;
+			
 		}
 		
 		//2-1. 폴더 경로 찾기
@@ -78,26 +85,64 @@ namespace MoveToSubFolders
 	
 		}
 		
+		DirectoryInfo myDirectory ;
+		FileInfo[] files;
+		
+		private CancellationTokenSource cancellationTokenSource;
+		
 		//3-1 분류 run
 		void Btn301RunClick(object sender, EventArgs e)
 		{
-			// 파일명
+			//await Task.Delay(100);
 			
-			DirectoryInfo myDirectory = new DirectoryInfo(txt202FolderPath.Text);
-			FileInfo[] files = myDirectory.GetFiles("*." + txt201Ext.Text).OrderByDescending(file => System.Text.Encoding.Default.GetByteCount(file.Name)).ToArray();
-			
-			//출처 : https://www.csharpstudy.com/WinForms/WinForms-listview.aspx
-			// 리스트뷰 아이템을 업데이트 하기 시작.
-			// 업데이트가 끝날 때까지 UI 갱신 중지.
-			listView301.BeginUpdate();		
-			
-			// 뷰모드 지정
-			listView301.View = View.Details;
-			
-			// 아이콘을 위해 이미지 지정
-			//listView301.LargeImageList = imageList1;
-			//listView301.SmallImageList = imageList2;
-			
+			try{
+				myDirectory = new DirectoryInfo(txt202FolderPath.Text);
+				files = myDirectory.GetFiles("*." + txt201Ext.Text).OrderByDescending(file => System.Text.Encoding.Default.GetByteCount(file.Name)).ToArray();
+				
+				//출처 : https://www.csharpstudy.com/WinForms/WinForms-listview.aspx
+				// 리스트뷰 아이템을 업데이트 하기 시작.
+				// 뷰모드 지정
+				listView301.View = View.Details;
+				
+				// 버튼 비활성화 등 UI 업데이트
+				btn301Run.Enabled = false;
+				btn302Stop.Enabled = true;
+				
+				// 프로그래스바 초기화
+				toolStripProgressBar1.Value = 0;
+				
+				PerformWork();
+
+			}catch (Exception ex)
+			{
+				// 예외 처리
+				//MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("Error: " + ex.Message);
+				toolStripStatusLabel3.Text ="Error: " + ex.Message;
+				
+				
+			}finally
+			{
+				// 작업 완료 후 UI 업데이트
+				btn301Run.Enabled = true;
+				btn302Stop.Enabled = false;
+				toolStripProgressBar1.Value = 100;
+				
+				txt401.Text += "파일분류완료!!!" + "\r\n";
+	    		MessageBox.Show("파일분류완료!!!");
+	    		toolStripStatusLabel3.Text ="파일분류완료!!!";
+
+				
+				listView301.EndUpdate();
+				cancellationTokenSource = null;				
+				
+				
+			}
+
+		}
+		
+		void PerformWork()
+		{
 			foreach (var fi in files)
 			{
 				// 각 파일별로 ListViewItem객체를 하나씩 만듦
@@ -114,32 +159,38 @@ namespace MoveToSubFolders
 				
 				// ListViewItem객체를 Items 속성에 추가
 				listView301.Items.Add(lvi);
+				
+				//listView301.Invoke(new Action(() => listView301.Items.Add(lvi)));
+				
 			}
 			
 			// 컬럼명과 컬럼사이즈 지정
-			listView301.Columns.Add("파일명", 160, HorizontalAlignment.Left);
-			listView301.Columns.Add("확장자", 60, HorizontalAlignment.Left);
-			listView301.Columns.Add("파일명 길이", 50, HorizontalAlignment.Right);
-			listView301.Columns.Add("사이즈", 70, HorizontalAlignment.Right);
-			listView301.Columns.Add("날짜", 150, HorizontalAlignment.Left);
-
-			// 리스뷰를 Refresh하여 보여줌
-			listView301.EndUpdate();			
+			listView301.Invoke(new Action(() =>
+			                      {
+			                        listView301.Columns.Add("파일명", 160, HorizontalAlignment.Left);
+			                        listView301.Columns.Add("확장자", 60, HorizontalAlignment.Left);
+			                        listView301.Columns.Add("파일명 길이", 50, HorizontalAlignment.Right);
+			                        listView301.Columns.Add("사이즈", 70, HorizontalAlignment.Right);
+			                        listView301.Columns.Add("날짜", 150, HorizontalAlignment.Left);
+		    }));
 			
-			txt401.Text ="";
+			// UI 업데이트
 			toolStripProgressBar1.Value = 0;
 			int vbpCnt = 0;
-	    	foreach (ListViewItem lvi in listView301.Items)
-	    	{
+			
+			foreach (ListViewItem lvi in listView301.Items)
+			{
+				// (작업 수행 코드)
 	    		txt401.Text += lvi.SubItems[0].Text + "\r\n";
 	    		
 	    		// 프로젝트파일명 (확장자없이) 으로
 	    		//1. 디렉토리가 없으면 생성
 	    		//2. 디렉토리가 있으면 생성하지 않음
 	    		//3. "*" + "프로젝트파일명" + "*.*" 패턴으로 프로젝트파일명 폴더에 복사
-	    		FileInfo[] subfiles = myDirectory.GetFiles("*" + lvi.SubItems[0].Text + ".*").OrderByDescending(file => System.Text.Encoding.Default.GetByteCount(file.Name)).ToArray();
+	    		FileInfo[] subfiles = myDirectory.GetFiles("*" + lvi.SubItems[0].Text + "*.*").OrderByDescending(file => System.Text.Encoding.Default.GetByteCount(file.Name)).ToArray();
 	    		string source_path = txt202FolderPath.Text;
-	    		string target_path = txt202FolderPath.Text +"\\" + lvi.SubItems[0].Text;
+	    		//string target_path = txt202FolderPath.Text +"\\" + lvi.SubItems[0].Text; // 확장자 없는 파일때문에 버그가 발생됨.
+	    		string target_path = txt202FolderPath.Text +"\\(" + lvi.SubItems[0].Text + ")"; // 확장자 없는 파일때문에 버그 방지를 위해 앞뒤로 괄호를 붙인다.
 	    		
 	    		bool exists = System.IO.Directory.Exists(target_path); // sub 폴더 존재하는지 체크
 	    		if(!exists)
@@ -159,21 +210,29 @@ namespace MoveToSubFolders
 	    			txt401.Text += source_file + " --> " + dest_file + "\r\n";
 	    			System.IO.File.Move(source_file, dest_file); //이동
 	    		}
-	    		vbpCnt++;
-	    		toolStripProgressBar1.Value =  vbpCnt/listView301.Items.Count * 100;
-	    		toolStripStatusLabel2.Text =toolStripProgressBar1.Value.ToString() + "%";
-	    		
-	    	}
-	    	txt401.Text += "파일분류완료!!!" + "\r\n";
-	    	MessageBox.Show("파일분류완료!!!");
-	
+				
+				
+				vbpCnt++;
+				int progress = vbpCnt * 100 / listView301.Items.Count;
+				//toolStripProgressBar1.Invoke(new Action(() => toolStripProgressBar1.Value = progress));
+			}
 		}
+		
+    
+		void Btn302StopClick(object sender, EventArgs e)
+		{
+			if (cancellationTokenSource != null)
+			{
+				// 작업 취소 요청
+				cancellationTokenSource.Cancel();
+			}	
+		}		
 
 		static string FormatFileSize(long fileSize)
 		{
 			// 파일 크기를 천 단위로 쉼표로 구분하여 형식 지정
 			return string.Format("{0:#,0}", fileSize);
-		}		
+		}
 		
 	}
 }
