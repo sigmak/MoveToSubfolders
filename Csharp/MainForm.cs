@@ -15,6 +15,8 @@ using System.Linq; // OrderByDescending 사용을 위해
 using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Threading;
+using System.Diagnostics; // 수행시간 측정을 위해
+
 
 // CS 201 : Properites\AssemblyInfo.cs 파일이 없다는 오류메세지 나오면
 // Properites 폴더 만들고 그 폴더 안에 AssemblyInfo.cs 파일 생성(내용 없어도 됨) 후
@@ -28,6 +30,7 @@ namespace MoveToSubFolders
 	/// </summary>
 	public partial class MainForm : Form
 	{
+		string sTemp1;
 		public MainForm()
 		{
 			//
@@ -64,6 +67,9 @@ namespace MoveToSubFolders
 			toolStripStatusLabel2.Text ="";
 			
 			toolStripStatusLabel3.Text ="";	
+
+			sTemp1 = "00:00:00.0000000"; //수행시간 초기화
+			toolStripStatusLabel4.Text = sTemp1; //수행시간 초기화
 			
 			btn301Run.Enabled = true;
 			btn302Stop.Enabled = false;
@@ -90,11 +96,12 @@ namespace MoveToSubFolders
 		
 		private CancellationTokenSource cancellationTokenSource;
 		
+		Stopwatch SW = new Stopwatch();
 		//3-1 분류 run
 		void Btn301RunClick(object sender, EventArgs e)
 		{
-			//await Task.Delay(100);
-			
+			SW.Reset();
+			SW.Start();
 			try{
 				myDirectory = new DirectoryInfo(txt202FolderPath.Text);
 				files = myDirectory.GetFiles("*." + txt201Ext.Text).OrderByDescending(file => System.Text.Encoding.Default.GetByteCount(file.Name)).ToArray();
@@ -138,6 +145,12 @@ namespace MoveToSubFolders
 				
 				
 			}
+			SW.Stop();
+			
+			//현재 인스턴스가 측정한 총 경과 시간을 가져옵니다.
+			//출처 : https://developerking.tistory.com/73 
+			sTemp1 = SW.Elapsed.ToString();
+			toolStripStatusLabel4.Text = sTemp1;
 
 		}
 		

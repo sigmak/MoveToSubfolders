@@ -34,6 +34,7 @@ namespace MoveToSubFolders
 		private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
 		private System.Windows.Forms.Button btn302Stop;
 		private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+		private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -76,6 +77,7 @@ namespace MoveToSubFolders
 			this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
 			this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
 			this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+			this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
 			this.tabControl1.SuspendLayout();
 			this.tabPage1.SuspendLayout();
 			this.tabPage2.SuspendLayout();
@@ -255,7 +257,8 @@ namespace MoveToSubFolders
 			this.toolStripStatusLabel1,
 			this.toolStripProgressBar1,
 			this.toolStripStatusLabel2,
-			this.toolStripStatusLabel3});
+			this.toolStripStatusLabel3,
+			this.toolStripStatusLabel4});
 			this.statusStrip1.Location = new System.Drawing.Point(0, 274);
 			this.statusStrip1.Name = "statusStrip1";
 			this.statusStrip1.Size = new System.Drawing.Size(629, 22);
@@ -284,6 +287,12 @@ namespace MoveToSubFolders
 			this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
 			this.toolStripStatusLabel3.Size = new System.Drawing.Size(121, 17);
 			this.toolStripStatusLabel3.Text = "toolStripStatusLabel3";
+			// 
+			// toolStripStatusLabel4
+			// 
+			this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
+			this.toolStripStatusLabel4.Size = new System.Drawing.Size(121, 17);
+			this.toolStripStatusLabel4.Text = "toolStripStatusLabel4";
 			// 
 			// MainForm
 			// 
