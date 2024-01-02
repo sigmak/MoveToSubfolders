@@ -23,5 +23,9 @@ _XXX로 분기되는 패턴이 먼저 분류가 되기 때문에
 _XXX로 분기 안된 프로젝트와 섞이지 않게 됨.  
 
 3. 사용예제 캡쳐
+3-1. 초기버전
 <img src='https://github.com/sigmak/MoveToSubfolders/blob/main/Csharp/moveToSubFolders_sc.gif' />
+
+3-2. 1.0 버전
+<img src='https://github.com/sigmak/MoveToSubfolders/blob/main/Csharp/moveToSubFolders_sc2.gif' />
 
