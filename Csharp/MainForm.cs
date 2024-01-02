@@ -13,9 +13,10 @@ using System.Windows.Forms;
 using System.IO;
 using System.Linq; // OrderByDescending 사용을 위해
 
-//using System.Collections;
-//using System.Windows.Forms;
 
+// CS 201 : Properites\AssemblyInfo.cs 파일이 없다는 오류메세지 나오면
+// Properites 폴더 만들고 그 폴더 안에 AssemblyInfo.cs 파일 생성(내용 없어도 됨) 후
+// 새로 빌드 하면 오류 나타나지 않음.
 
 
 namespace MoveToSubFolders
@@ -52,6 +53,13 @@ namespace MoveToSubFolders
 			
 			//출처 : https://w9526819.tistory.com/20
 			txt202FolderPath.Text = System.IO.Directory.GetCurrentDirectory(); // 현재 실행파일 경로 가져오기
+			
+			toolStripStatusLabel1.Text ="https://github.com/sigmak/MoveToSubfolders";
+			toolStripProgressBar1.Minimum = 0;
+			toolStripProgressBar1.Maximum = 100;
+			toolStripProgressBar1.Step =1;
+			
+			toolStripStatusLabel2.Text ="";
 			
 		}
 		
@@ -119,6 +127,8 @@ namespace MoveToSubFolders
 			listView301.EndUpdate();			
 			
 			txt401.Text ="";
+			toolStripProgressBar1.Value = 0;
+			int vbpCnt = 0;
 	    	foreach (ListViewItem lvi in listView301.Items)
 	    	{
 	    		txt401.Text += lvi.SubItems[0].Text + "\r\n";
@@ -149,6 +159,10 @@ namespace MoveToSubFolders
 	    			txt401.Text += source_file + " --> " + dest_file + "\r\n";
 	    			System.IO.File.Move(source_file, dest_file); //이동
 	    		}
+	    		vbpCnt++;
+	    		toolStripProgressBar1.Value =  vbpCnt/listView301.Items.Count * 100;
+	    		toolStripStatusLabel2.Text =toolStripProgressBar1.Value.ToString() + "%";
+	    		
 	    	}
 	    	txt401.Text += "파일분류완료!!!" + "\r\n";
 	    	MessageBox.Show("파일분류완료!!!");
